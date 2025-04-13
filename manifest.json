@@ -2,7 +2,7 @@
     "manifest_version": 3,
     "name": "Better Chrome Search Bar",
     "version": "1.0",
-    "description": "Enhanced find-in-page functionality with regex, case matching, and whole word matching",
+    "description": "Enhanced find-in-page functionality with regex, case matching, and whole word matching. Shortcuts: Shift+Cmd+C (Match Case), Shift+Cmd+W (Whole Word), Shift+Cmd+R (Regex)",
     "permissions": ["activeTab", "commands", "scripting", "storage"],
     "action": {
         "default_popup": "popup.html"

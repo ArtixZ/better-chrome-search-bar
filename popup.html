@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <meta charset="UTF-8" />
         <title>Enhanced Find</title>
         <style>
             body {
@@ -172,7 +173,7 @@
                             >0</span
                         >
                     </div>
-                    <button id="prevButton" class="nav-button">
+                    <button id="prevButton" class="nav-button" title="⇧Enter">
                         <svg
                             viewBox="0 0 24 24"
                             fill="none"
@@ -186,7 +187,7 @@
                             />
                         </svg>
                     </button>
-                    <button id="nextButton" class="nav-button">
+                    <button id="nextButton" class="nav-button" title="Enter">
                         <svg
                             viewBox="0 0 24 24"
                             fill="none"
@@ -204,15 +205,15 @@
             </div>
 
             <div class="search-options">
-                <label class="option-group">
+                <label class="option-group" title="⇧⌘C">
                     <input type="checkbox" id="matchCase" />
                     Match case
                 </label>
-                <label class="option-group">
+                <label class="option-group" title="⇧⌘W">
                     <input type="checkbox" id="wholeWord" />
                     Whole word
                 </label>
-                <label class="option-group">
+                <label class="option-group" title="⇧⌘R">
                     <input type="checkbox" id="useRegex" />
                     Regex
                 </label>

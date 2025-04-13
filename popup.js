@@ -8,6 +8,18 @@ document.addEventListener("DOMContentLoaded", () => {
     const currentMatchSpan = document.getElementById("currentMatch");
     const totalMatchesSpan = document.getElementById("totalMatches");
 
+    // Detect OS and set keyboard shortcut tooltips
+    const isMac = navigator.platform.toUpperCase().indexOf("MAC") >= 0;
+    const modifierKey = isMac ? "⌘" : "Ctrl";
+    const shiftKey = isMac ? "⇧" : "Shift";
+
+    // Update tooltips based on OS
+    matchCaseCheckbox.parentElement.title = `${shiftKey}+${modifierKey}+C`;
+    wholeWordCheckbox.parentElement.title = `${shiftKey}+${modifierKey}+W`;
+    useRegexCheckbox.parentElement.title = `${shiftKey}+${modifierKey}+R`;
+    prevButton.title = `${shiftKey}+Enter`;
+    nextButton.title = `Enter`;
+
     let debounceTimeout;
     let isContentScriptReady = false;
 
@@ -40,7 +52,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const container = document.querySelector(".search-container");
         const messageDiv = document.createElement("div");
         messageDiv.className = "message info";
-        messageDiv.innerHTML = `Pro tip: Set up <strong>Cmd+F</strong> in <a href="#">chrome://extensions/shortcuts</a>`;
+        messageDiv.innerHTML = `💡 Pro tip: Set up <strong>Cmd+F</strong> in <a href="#">chrome://extensions/shortcuts</a>`;
         container.insertBefore(messageDiv, container.firstChild);
 
         // Open chrome://extensions/shortcuts when clicked
@@ -148,6 +160,30 @@ document.addEventListener("DOMContentLoaded", () => {
         clearTimeout(debounceTimeout);
         debounceTimeout = setTimeout(performSearch, 300);
     };
+
+    // Add global keyboard shortcuts
+    document.addEventListener("keydown", (e) => {
+        // Check if Shift + Cmd/Ctrl + key is pressed
+        if (e.shiftKey && (e.metaKey || e.ctrlKey)) {
+            switch (e.key.toLowerCase()) {
+                case "c":
+                    e.preventDefault();
+                    matchCaseCheckbox.checked = !matchCaseCheckbox.checked;
+                    matchCaseCheckbox.dispatchEvent(new Event("change"));
+                    break;
+                case "w":
+                    e.preventDefault();
+                    wholeWordCheckbox.checked = !wholeWordCheckbox.checked;
+                    wholeWordCheckbox.dispatchEvent(new Event("change"));
+                    break;
+                case "r":
+                    e.preventDefault();
+                    useRegexCheckbox.checked = !useRegexCheckbox.checked;
+                    useRegexCheckbox.dispatchEvent(new Event("change"));
+                    break;
+            }
+        }
+    });
 
     // Event listeners
     searchInput.addEventListener("input", debouncedSearch);
